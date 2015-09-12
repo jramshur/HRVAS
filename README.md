@@ -4,6 +4,10 @@ HRVAS is a complete and self-contained heart rate variability analysis software 
 
 ![](https://raw.githubusercontent.com/wiki/jramshur/HRVAS/images/TF-Waterfall.png)
 
+## Installation and Documentation
+
+[link][https://github.com/jramshur/HRVAS/wiki]
+
 ## MATLAB Toolbox Dependencies:
 
     1. Signal Processing Toolbox (used for PSD estimates)
