@@ -4,9 +4,31 @@ HRVAS is a complete and self-contained heart rate variability analysis software 
 
 ![](https://raw.githubusercontent.com/wiki/jramshur/HRVAS/images/TF-Waterfall.png)
 
-## Installation and Documentation
+## HRVAS Wiki
 
-[link][https://github.com/jramshur/HRVAS/wiki]
+* [Home][home]
+* [Installation][install]
+* [Quick Start Guide][quickstart]
+* [Misc. Info][misc]
+* [HRV Analysis & Preprocessing][analysis]
+  * [IBI Extraction][ibi]
+  * [Preprocessing][pre]
+  * [Time-Domain Analysis][time]
+  * [Freq-Domain Analysis][freq]
+  * [Nonlinear Analysis][nl]
+  * [Time-Freq Analysis][tf]
+
+[home]: https://github.com/myproject/wiki/Home
+[install]: https://github.com/myproject/wiki/Technical-documentation
+[quickstart]: https://github.com/myproject/wiki/User-manual
+[misc]: https://github.com/myproject/wiki/Home
+[analysis]: https://github.com/myproject/wiki/Home
+[ibi]: https://github.com/myproject/wiki/Home
+[pre]: https://github.com/myproject/wiki/Home
+[time]: https://github.com/myproject/wiki/Home
+[freq]: https://github.com/myproject/wiki/Home
+[nl]: https://github.com/myproject/wiki/Home
+[tf]: https://github.com/myproject/wiki/Home
 
 ## MATLAB Toolbox Dependencies:
 
