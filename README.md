@@ -9,7 +9,9 @@ HRVAS is a complete and self-contained heart rate variability analysis software 
 * [Home][home]
 * [Installation][install]
 * [Quick Start Guide][quickstart]
-* [Misc. Info][misc]
+* [GUI][gui]
+* [Input-Output][io]
+* [Batch Processing][batch]
 * [HRV Analysis & Preprocessing][analysis]
   * [IBI Extraction][ibi]
   * [Preprocessing][pre]
@@ -18,17 +20,20 @@ HRVAS is a complete and self-contained heart rate variability analysis software 
   * [Nonlinear Analysis][nl]
   * [Time-Freq Analysis][tf]
 
-[home]: https://github.com/myproject/wiki/Home
-[install]: https://github.com/myproject/wiki/Technical-documentation
-[quickstart]: https://github.com/myproject/wiki/User-manual
-[misc]: https://github.com/myproject/wiki/Home
-[analysis]: https://github.com/myproject/wiki/Home
-[ibi]: https://github.com/myproject/wiki/Home
-[pre]: https://github.com/myproject/wiki/Home
-[time]: https://github.com/myproject/wiki/Home
-[freq]: https://github.com/myproject/wiki/Home
-[nl]: https://github.com/myproject/wiki/Home
-[tf]: https://github.com/myproject/wiki/Home
+
+[home]: https://github.com/jramshur/HRVAS/wiki/Home
+[install]: https://github.com/jramshur/HRVAS/wiki/Install
+[quickstart]: https://github.com/jramshur/HRVAS/wiki/Quick-Start
+[gui]: https://github.com/jramshur/HRVAS/wiki/GUI
+[io]: https://github.com/jramshur/HRVAS/wiki/Input-Output
+[analysis]: https://github.com/jramshur/HRVAS/wiki/HRV-Analysis-and-Preprocessing
+[ibi]: https://github.com/jramshur/HRVAS/wiki/IBI-Extraction
+[pre]: https://github.com/jramshur/HRVAS/wiki/Preprocessing
+[time]: https://github.com/jramshur/HRVAS/wiki/Time
+[freq]: https://github.com/jramshur/HRVAS/wiki/Freq
+[nl]: https://github.com/jramshur/HRVAS/wiki/Nonlinear
+[tf]: https://github.com/jramshur/HRVAS/wiki/Time-Freq
+[batch]: https://github.com/jramshur/HRVAS/wiki/Batch-Processing
 
 ## MATLAB Toolbox Dependencies:
 
