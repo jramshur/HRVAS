@@ -1,10 +1,10 @@
-## Program Description:
+## Program Description
 
-HRVAS is a complete and self-contained heart rate variability analysis software     (HRVAS) package. HRVAS offers several preprocessing options. HRVAS offers time-domeain, freq-domain, time-frequency, and nonlinear HRV analysis. All results can be exported to an Excel file. For processing many files HRVAS offers a bach processing feature. All settings/options can be saved to a .mat file and reloaded for future HRV analysis. Upon starting HRVAS all previously used settings/options are loaded.
+HRVAS is a complete and self-contained heart rate variability analysis software     (HRVAS) package. HRVAS offers several preprocessing options. HRVAS offers time-domain, freq-domain, time-frequency, and non-linear HRV analysis. All results can be exported to an Excel file. For processing many files HRVAS offers a bach processing feature. All settings/options can be saved to a .mat file and reloaded for future HRV analysis. Upon starting HRVAS all previously used settings/options are loaded.
 
 ![](https://raw.githubusercontent.com/wiki/jramshur/HRVAS/images/TF-Waterfall.png)
 
-## Wiki:
+## Wiki
 
 * [Home][home]
 * [Installation][install]
@@ -20,7 +20,6 @@ HRVAS is a complete and self-contained heart rate variability analysis software 
   * [Nonlinear Analysis][nl]
   * [Time-Freq Analysis][tf]
 
-
 [home]: https://github.com/jramshur/HRVAS/wiki/Home
 [install]: https://github.com/jramshur/HRVAS/wiki/Install
 [quickstart]: https://github.com/jramshur/HRVAS/wiki/Quick-Start
@@ -35,13 +34,7 @@ HRVAS is a complete and self-contained heart rate variability analysis software 
 [tf]: https://github.com/jramshur/HRVAS/wiki/Time-Freq
 [batch]: https://github.com/jramshur/HRVAS/wiki/Batch-Processing
 
-## MATLAB Toolbox Dependencies:
-
-    1. Signal Processing Toolbox (used for PSD estimates)
-    2. Wavelet Toolbox (used for wavelet and wavelet packet detrending)
-    3. Curvefitting Toolbox (only needed if using the "smooth" function for detrending)
-
-## Contact Information:
+## Contact Information
     
     John T. Ramshur, PhD
     jramshur@gmail.com
@@ -52,9 +45,9 @@ HRVAS is a complete and self-contained heart rate variability analysis software 
     
     jramshur@memphis.edu
 
-## License Information:
+## License Information
 
-Copyright (C) 2010, John T. Ramshur
+GNU General Public License 3.0
 
 This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
 
