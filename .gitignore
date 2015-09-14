@@ -40,7 +40,8 @@ $RECYCLE.BIN/
 *.zip
 *.csv
 freqDomainHRV_example
-/HRVAS
-/non_dep_files
-/otherStuff
+HRVAS/
+non_dep_files/
+otherStuff/
+Documentation/
 *.psd
