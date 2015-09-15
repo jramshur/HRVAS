@@ -34,14 +34,10 @@ $RECYCLE.BIN/
 .DS_Store
 
 #############
-## Other Stuff
+## Untracked files:
 #############
 
 *.zip
 *.csv
-freqDomainHRV_example
 HRVAS/
-non_dep_files/
-otherStuff/
 Documentation/
-*.psd
