@@ -1,6 +1,6 @@
 function main
 
 %open main gui
-HRVAS
+HRVAS_r2010b
 
 end
