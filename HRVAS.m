@@ -23,7 +23,11 @@
 function HRVAS
 % HRVAS: GUI to calculate heart rate variability (HRV) measures
 %
-% Version: 1.0.2
+% Version: 1.0.3
+% - uitab/uitabgroup controls have been changed to accomidate
+%  Matlab 2016a
+% - added explicit font sizes for several GUI elements. The defaults apperantly
+%   that have changed during MATLAB updates. 
 %
 % Notes: 
 % TODO: 
@@ -136,7 +140,8 @@ function HRVAS
         'HandleVisibility','callback', ...
         'Units', 'normalized', 'Position',[.05 0.27 0.93 0.65],...
         'FontSize',8,'Box','on');
-    xlabel(h.axesIBI,'Time (hh:mm:ss)'); ylabel(h.axesIBI,'IBI (s)');
+    xlabel(h.axesIBI,'Time (hh:mm:ss)','FontSize',10);
+    ylabel(h.axesIBI,'IBI (s)','FontSize',10);
     h.lblStatus=uicontrol(h.panelIBI,'Style','edit', 'String','',...
         'Units', 'normalized', 'Position',[.42 .5 .2 .2],...
         'BackgroundColor',color.status.back, 'FontSize',12, ...
@@ -172,7 +177,7 @@ function HRVAS
     %Preview Button
      h.btnPreview=uicontrol(h.panelPre,'Style','pushbutton', ...
         'String','Preview', 'Units', 'normalized', ...
-        'Position',[.72 .99 .25 .05],...
+        'Position',[.72 .93 .25 .06],'FontSize',8,...
         'Callback', @btnPreview_Callback);
     
     %Ectopic Detection
@@ -738,23 +743,22 @@ function HRVAS
             'Units', 'normalized', 'Position',[.5 0 .5 .7]);   
     warning('off','MATLAB:uitab:DeprecatedFunction')
     warning('off','MATLAB:uitabgroup:DeprecatedFunction')
-    h.tabgroup = uitabgroup('v0','Parent',h.panelHRV,'Tag','tabs', ...
+    h.tabgroup = uitabgroup('Parent',h.panelHRV,'Tag','tabs', ...
         'Units','normalized','Position',[0 0 1 1]);   
     
 %% GUI: Results - Time Domain Tab
 
-    h.tab1 = uitab('v0',h.tabgroup, 'title', 'Time Domain', ...
-        'Position',[1 1 1 1]);
+    h.tab1 = uitab('parent',h.tabgroup, 'title', 'Time Domain');
     h.panelTime = uipanel('Parent',h.tab1, ...
         'Position',[.0 .0 1 1], 'BackgroundColor','white');    
     h.axesHistIBI=axes('parent', h.panelTime, ...
-        'Position',[.05 .08 .4 .28], 'FontSize',7,'Box','on');
-    xlabel(h.axesHistIBI,'IBI (ms)'); 
-    title(h.axesHistIBI,'IBI Histogram')
+        'Position',[.06 .09 .4 .28], 'FontSize',7,'Box','on');
+    xlabel(h.axesHistIBI,'IBI (ms)','FontSize',7); 
+    title(h.axesHistIBI,'IBI Histogram','FontSize',9)
     h.axesHistBPM=axes('parent', h.panelTime, ...
-        'Position',[.55 .08 .4 .28], 'FontSize',7,'Box','on');
-    xlabel(h.axesHistBPM,'HR (bpm)');
-    title(h.axesHistBPM,'HR Histogram')
+        'Position',[.55 .09 .4 .28], 'FontSize',7,'Box','on');
+    xlabel(h.axesHistBPM,'HR (bpm)','FontSize',7);
+    title(h.axesHistBPM,'HR Histogram','FontSize',9)
     h.axesTimeTbl = axes('parent', h.panelTime, ...
         'Position',[.05 .45 .9 .5],...
         'YColor',[1 1 1],'YTickLabel',{},'ylim',[0 1],...
@@ -764,16 +768,15 @@ function HRVAS
     
 %% GUI: Results - Freq Doamin Tab
 
-    h.tab2 = uitab('v0',h.tabgroup, 'title', 'Freq Domain', ...
-        'Position',[10 1 1 1]);
+    h.tab2 = uitab(h.tabgroup, 'title', 'Freq Domain');
     h.panelFreq = uipanel('Parent',h.tab2, ...
         'Position',[.0 .0 1 1],'BackgroundColor','white');
     h.axesFreq = axes('parent', h.panelFreq, ...
-        'Position',[.1 .565 .8 .365], 'FontSize',7,'Box','on');
-    xlabel(h.axesFreq, 'Freq (Hz)'); 
-    ylabel(h.axesFreq, 'PSD (ms^2/Hz)');
+        'Position',[.1 .57 .8 .36], 'FontSize',7,'Box','on');
+    xlabel(h.axesFreq, 'Freq (Hz)','FontSize',8); 
+    ylabel(h.axesFreq, 'PSD (ms^2/Hz)','FontSize',8);
     
-    h.axesFreqTbl = axes('parent', h.panelFreq, ...
+    h.axesFreqTbl = axes('parent', h. panelFreq, ...
         'Position',[.05 .02 .9 .475],...
         'YColor',[1 1 1],'YTickLabel',{},'ylim',[0 1],...
         'XColor',[1 1 1],'XTickLabel',{},'xlim',[0 1]);
@@ -806,8 +809,7 @@ function HRVAS
     
 %% GUI: Results - Poincare Tab
 
-    h.tab3 = uitab('v0',h.tabgroup, 'title', 'Poincare', ...
-        'Position',[10 1 1 1]);
+    h.tab3 = uitab('Parent',h.tabgroup, 'title', 'Poincare');
     h.panelPoincare = uipanel('Parent',h.tab3, ...
         'Position',[.0 .0 1 1], 'BackgroundColor','white'); 
     h.axesPoincare = axes('parent', h.panelPoincare, ...
@@ -815,7 +817,7 @@ function HRVAS
                          
 %% GUI: Results - Nonlinear Tab
 
-    h.tab4 = uitab('v0',h.tabgroup, 'title', 'Nonlinear'); 
+    h.tab4 = uitab('Parent',h.tabgroup, 'title', 'Nonlinear'); 
     h.panelNL = uipanel('Parent',h.tab4,'Position',[.0 .0 1 1], ...
         'BackgroundColor','white');            
     h.axesNL = axes('parent', h.panelNL,'Position',[.1 .55 .8 .4], ...
@@ -831,7 +833,7 @@ function HRVAS
     
 %% GUI: Results - TimeFreq Tab
 
-    h.tab6 = uitab('v0',h.tabgroup, 'title', 'Time-Freq'); 
+    h.tab6 = uitab('Parent',h.tabgroup, 'title', 'Time-Freq'); 
     h.panelTF = uipanel('Parent',h.tab6,'Position',[.0 .0 1 1],...
         'BackgroundColor','white');
     h.axesTF = axes('parent', h.panelTF,'Position',[.1 .565 .8 .365], ...
@@ -853,7 +855,7 @@ function HRVAS
         'HorizontalAlignment','left');
     h.radioTFPlotAR = uicontrol(h.btngrpTFPlot,'Style','radiobutton', ...
         'String','Burg', 'Units','normalized', ...
-        'Position',[.15 .035 .17 .99],'BackgroundColor','white',...
+        'Position',[.15 .035 .18 .99],'BackgroundColor','white',...
         'HorizontalAlignment','left');
     h.radioTFPlotLS = uicontrol(h.btngrpTFPlot,'Style','radiobutton',...
         'String','LS','Units','normalized', ...
@@ -912,8 +914,7 @@ function HRVAS
     % Export HRV
         
         if flagProcessed %if there are HRV results to export
-            [f p] = uiputfile({'*.csv','Comma Delimited (*.csv)'; ...
-                '*.xlsx','Microsoft Excel (*.xlsx)'},'Save HRV As');
+            [f p]=uiputfile('*.xlsx','Save HRV As');
             if ~isequal(f,0)
                 outfile=fullfile(p,f);
                 [p2 f2]=fileparts(settings.file);
@@ -1236,8 +1237,9 @@ function HRVAS
             end
             plotPSD(h.axesFreq,f,psd,settings.VLF,settings.LF, ...
                 settings.HF,[],[],true,flagLS);
-            xlabel(h.axesFreq,'Freq (Hz)');
-            ylabel(h.axesFreq,ylbl);            
+            set(h.axesFreq,'FontSize',7)
+            xlabel(h.axesFreq,'Freq (Hz)','FontSize',8);
+            ylabel(h.axesFreq,ylbl,'FontSize',8);            
         end
     end
 
@@ -1370,7 +1372,7 @@ function HRVAS
         else
             ibi=tmpData; %ok
         end                                      
-        clear tmpData
+        clear tmpData      
     end
 
     function output = loadSettings(f)
@@ -1754,7 +1756,7 @@ function HRVAS
             set(h.txtSmoothDegree,'Visible','off');
             set(h.lblSmoothDegree,'Visible','off');
             set(h.listWaveletType,'Visible','off');
-            set(h.lblWaveletType,'Visible','off');
+            et(h.lblWaveletType,'Visible','off');
             set(h.txtWaveletType2,'Visible','off');
             set(h.lblWaveletType2,'Visible','off');
             set(h.txtWaveletLevels,'Visible','off');
@@ -1812,14 +1814,14 @@ function HRVAS
         line([0 1],[.85 .85],'Parent',aH,'Color','black')
         line([0 1],[0 0],'Parent',aH,'Color','black')
         text(0,1,'Time Domain','Parent',aH, ...
-            'Units','normalized', 'fontweight','bold')
+            'Units','normalized', 'fontweight','bold','FontSize',8)
         %Col Headers
         text(x1-.02,.9,'Variable','Parent',aH, ...
-            'Units','normalized', 'fontweight','bold')
+            'Units','normalized', 'fontweight','bold','FontSize',8)
         text(x2,.9,'Units','Parent',aH,'Units','normalized', ...
-            'HorizontalAlignment','right', 'fontweight','bold')
+            'HorizontalAlignment','right', 'fontweight','bold','FontSize',8)
         text(x3,.9,'Value','Parent',aH,'Units','normalized', ...
-            'HorizontalAlignment','right', 'fontweight','bold')
+            'HorizontalAlignment','right', 'fontweight','bold','FontSize',8)
         %Column 1
         tH(1,1)=text(x1,y(1),'MeanIBI','Parent',aH,'Units','normalized');
         tH(2,1)=text(x1,y(2),'SDNN','Parent',aH,'Units','normalized');
@@ -1894,17 +1896,17 @@ function HRVAS
         line([0 1],[0 0],'Parent',aH,'Color','black');      
         %Header
         text(x1-.02,.88,{'Frequency','Band'},'Parent',aH, ...
-            'Units','normalized', 'fontweight','bold');
+            'Units','normalized', 'fontweight','bold','FontSize',8);
         text(x2,.88,{'Peak','(Hz)'},'Parent',aH,'Units','normalized', ...
-            'HorizontalAlignment','right','fontweight','bold');
+            'HorizontalAlignment','right','fontweight','bold','FontSize',8);
         text(x3,.88,{'Power','(ms^2)'},'Parent',aH,'Units','normalized', ...
-            'HorizontalAlignment','right', 'fontweight','bold');        
+            'HorizontalAlignment','right', 'fontweight','bold','FontSize',8);        
         text(x4,.88,{'Power','(%)'},'Parent',aH,'Units','normalized', ...
-            'HorizontalAlignment','right', 'fontweight','bold');
+            'HorizontalAlignment','right', 'fontweight','bold','FontSize',8);
         text(x5,.88,{'Power','(n.u.)'},'Parent',aH,'Units','normalized', ...
-            'HorizontalAlignment','right', 'fontweight','bold');
+            'HorizontalAlignment','right', 'fontweight','bold','FontSize',8);
         text(x6,.88,{'LF/HF','(ratio)'},'Parent',aH, ...
-            'Units','normalized', 'fontweight','bold', ...
+            'Units','normalized', 'fontweight','bold','FontSize',8,  ...
             'HorizontalAlignment','right');
         %Column 1
         tH(1,1)=text(x1-.02,y(1),'Welch PSD','Parent',aH, ...
@@ -1981,14 +1983,14 @@ function HRVAS
         line([0 1],[.85 .85],'Parent',aH,'Color','black')
         line([0 1],[0 0],'Parent',aH,'Color','black')
         text(0,1,'Nonlinear Statistics','Parent',aH, ...
-            'Units','normalized', 'fontweight','bold')
+            'Units','normalized', 'fontweight','bold','FontSize',8)
         %Col Headers
         text(x1-.02,.9,'Variable','Parent',aH,'Units','normalized' ...
             , 'fontweight','bold','fontsize',8)
         text(x2,.9,'Units','Parent',aH,'Units','normalized', ...
-            'HorizontalAlignment','right', 'fontweight','bold')
+            'HorizontalAlignment','right', 'fontweight','bold','FontSize',8)
         text(x3,.9,'Value','Parent',aH,'Units','normalized', ...
-            'HorizontalAlignment','right', 'fontweight','bold')
+            'HorizontalAlignment','right', 'fontweight','bold','FontSize',8)
         %Column 1
         tH(1,1)=text(x1-.02,.75,'Entropy','Parent',aH, ...
             'Units','normalized', 'fontweight','bold');
@@ -2030,18 +2032,18 @@ function HRVAS
         line([0 1],[0 0],'Parent',aH,'Color','black')        
         %Header
         text(x1-.02,.88,{'Frequency','Band'},'Parent',aH, ...
-            'Units','normalized', 'fontweight','bold')
+            'Units','normalized', 'fontweight','bold','FontSize',8)
         text(x2,.88,{'Peak','(Hz)'},'Parent',aH,'Units','normalized', ...
-           'HorizontalAlignment','right', 'fontweight','bold')
+           'HorizontalAlignment','right', 'fontweight','bold','FontSize',8)
         text(x3,.88,{'Power','(ms^2)'},'Parent',aH,'Units','normalized', ...
-            'HorizontalAlignment','right', 'fontweight','bold')
+            'HorizontalAlignment','right', 'fontweight','bold','FontSize',8)
         text(x4,.88,{'Power','(%)'},'Parent',aH,'Units','normalized', ...
-            'HorizontalAlignment','right', 'fontweight','bold')
+            'HorizontalAlignment','right', 'fontweight','bold','FontSize',8)
         text(x5,.88,{'Power','(n.u.)'},'Parent',aH,'Units','normalized', ...
-            'HorizontalAlignment','right', 'fontweight','bold')
+            'HorizontalAlignment','right', 'fontweight','bold','FontSize',8)
         text(x6,.88,{'LF/HF','(ratio)'},'Parent',aH, ...
             'Units','normalized', ...
-            'HorizontalAlignment','right', 'fontweight','bold')
+            'HorizontalAlignment','right', 'fontweight','bold','FontSize',8)
         %Column 1
         tH(1,1)=text(x1-.02,y(1),'Burg PSD','Parent',aH, ...
             'Units','normalized', 'FontWeight','bold');
@@ -2160,10 +2162,10 @@ function HRVAS
                 datestr(datenum(num2str(xtick(i)),'SS'),'HH:MM:SS');
         end
         %set tick lables and axes limits
-        xlabel(h.axesIBI,'Time (hh:mm:ss)');
-        ylabel(h.axesIBI,'IBI (s)');
+        xlabel(h.axesIBI,'Time (hh:mm:ss)','FontSize',10);
+        ylabel(h.axesIBI,'IBI (s)','FontSize',10);
         set(h.axesIBI,'xlim',xlim,'ylim',ylim, ...
-            'xtick',xtick,'xticklabel',xticklabel)
+            'xtick',xtick,'xticklabel',xticklabel,'FontSize',8)
         
         %set event to copy fig on dblclick
         set(h.axesIBI,'ButtonDownFcn',@copyIBIAxes);
@@ -2392,9 +2394,8 @@ function HRVAS
         %add colorbar
         colormap(jet);
         pos=get(aH,'position');
-        hC=colorbar('fontsize',7,'position',[.95-.03 pos(2) .025 pos(4)]);
-        p=get(hC,'position'); p(3)=p(3)/2;
-        set(hC,'position',p)                
+        hC=colorbar(aH,'fontsize',7,'position',[.95-.03 pos(2) .025 pos(4)]);
+        p=get(hC,'position'); p(3)=p(3)/2; 
         
         %draw lines for vlf, lf, and hf bands
         x=xlimit'; x=[x,x,x];
@@ -2417,8 +2418,8 @@ function HRVAS
        % xlim(xlimit)
         
         %axis lables
-        xlabel('Time (s)')
-        ylabel('F (Hz)')
+        xlabel('Time (s)', 'FontSize', 8)
+        ylabel('F (Hz)', 'FontSize', 8)
         
         %set event to copy fig on dblclick
          set(aH,'ButtonDownFcn',@copyAxes);
@@ -2455,7 +2456,7 @@ function HRVAS
         if strcmpi(plotType,'waterfall')            
             childH=waterfall(TT',FF',PP');
             aP=findobj(gca,'plotType','patch');
-            set(childH,'FaceColor',[0.8314 0.8157 0.7843])            
+            set(aP,'FaceColor',[0.8314 0.8157 0.7843])
         else
             childH=surf(TT,FF,PP,'parent',aH,...
                 'LineStyle','none',...
@@ -2469,8 +2470,8 @@ function HRVAS
         if flagWavelet
             ylim=[min(log2(F)) max(log2(F))];
         else
-           % ylim=[0 (HF(end)*1.1)];
-            ylim=[min(F) max(F)];
+            ylim=[0 (HF(end)*1.1)];
+            %ylim=[min(F) max(F)];
         end 
         zlim=[min(min(PSD)) max(max(PSD))];
         zrange=abs(max(zlim)-min(zlim)); dz=0.01*zrange;
@@ -2561,10 +2562,10 @@ function HRVAS
         ylim=ylim.*[1 1.1]; %add 10% to height
         dx=abs(max(xlim)-min(xlim))*0.05; %5percent of xlim range
         xlim=xlim+[-dx dx]; %add dx to each side of hist        
-        set(h.axesHistIBI,'ylim',ylim,'xlim',xlim)
+        set(h.axesHistIBI,'ylim',ylim,'xlim',xlim,'FontSize',7)
         %set labels
         xlabel(h.axesHistIBI,'IBI (s)');
-        title(h.axesHistIBI,'IBI Histogram');
+        title(h.axesHistIBI,'IBI Histogram','FontSize',9);
         %set event to copy fig on dblclick
         set(h.axesHistIBI,'ButtonDownFcn',@copyAxes);
         set(hHist,'ButtonDownFcn',@copyParentAxes)
@@ -2581,10 +2582,10 @@ function HRVAS
         ylim=ylim.*[1 1.1]; %add 10% to height
         dx=abs(max(xlim)-min(xlim))*0.05; %5percent of xlim range
         xlim=xlim+[-dx dx]; %add dx to each side of hist        
-        set(h.axesHistBPM,'ylim',ylim,'xlim',xlim)
+        set(h.axesHistBPM,'ylim',ylim,'xlim',xlim,'FontSize',7)
         %set labels
         xlabel(h.axesHistBPM,'HR (bpm)');
-        title(h.axesHistBPM,'HR Histogram');
+        title(h.axesHistBPM,'HR Histogram','FontSize',9);
         %set event to copy fig on dblclick
         set(h.axesHistBPM,'ButtonDownFcn',@copyAxes);
         set(hHist,'ButtonDownFcn',@copyParentAxes)
@@ -2751,8 +2752,12 @@ function HRVAS
             flagLS=true;
         end
         plotPSD(h.axesFreq,f,psd,opt.VLF,opt.LF,opt.HF,[],[],true,flagLS);
-        xlabel(h.axesFreq,'Freq (Hz)'); 
-        ylabel(h.axesFreq,ylbl);
+        % configure the labels
+        set(h.axesFreq,'FontSize',7);
+        xlabel(h.axesFreq,'Freq (Hz)','FontSize',9); 
+        ylabel(h.axesFreq,ylbl,'FontSize',9);
+        
+        
     end
 
 %% Helper: Plot - Poincare
@@ -2781,7 +2786,7 @@ function HRVAS
         eqn=['-x+' num2str(2*cx)];
         hEz2=ezplot(h.axesPoincare,eqn,[xlim(1),xlim(2),ylim(1),ylim(2)]);
         set(hEz2,'color','black')
-        
+               
         %plot ellipse
         width=hrv.SD2/1000; %convert to s
         height=hrv.SD1/1000; %convert to s
@@ -2798,17 +2803,22 @@ function HRVAS
         
         hold(h.axesPoincare,'off');
         
-        %set(h.axesPoincare,'xlim',[0 1],'ylim',[0 1])
-        xlabel(h.axesPoincare,'IBI_N (s)')
-        ylabel(h.axesPoincare,'IBI_N_+_1 (s)')
-        h.text.p(1,1)=text(.10,.95,'SD1:','Parent',h.axesPoincare, ...
+      %  set(h.axesPoincare,'FontSize',7);
+       % title(eqn,'FontSize',10)
+        
+        a = get(gca,'XTickLabel');
+        set(gca,'XTickLabel',a,'FontSize',7)
+        
+        xlabel(h.axesPoincare,'IBI_N (s)','FontSize',9);
+        ylabel(h.axesPoincare,'IBI_N_+_1 (s)','FontSize',9);
+        h.text.p(1,1)=text(.05,.95,'SD1:','Parent',h.axesPoincare, ...
             'Units','normalized','Fontsize',8);
-        h.text.p(2,1)=text(.10,.9,'SD2:','Parent',h.axesPoincare, ...
+        h.text.p(2,1)=text(.05,.9,'SD2:','Parent',h.axesPoincare, ...
             'Units','normalized','Fontsize',8);
-        h.text.p(1,2)=text(.20,.95,...
+        h.text.p(1,2)=text(.15,.95,...
             [sprintf('%0.1f',hrv.SD1) ' ms'],...
             'Parent',h.axesPoincare,'Units','normalized','Fontsize',8);
-        h.text.p(2,2)=text(.20,.9,...
+        h.text.p(2,2)=text(.15,.9,...
             [sprintf('%0.1f',hrv.SD2) ' ms'],...
             'Parent',h.axesPoincare,'Units','normalized','Fontsize',8);
         
@@ -2842,10 +2852,10 @@ function HRVAS
         xlim=[min(x)-xadd, max(x)+xadd];
         yrange=abs(max(y)-min(y)); yadd=yrange*0.06;
         ylim=[min(y)-yadd, max(y)+yadd];
-        set(h.axesNL,'xlim',xlim,'ylim',ylim)
-        title(h.axesNL,'DFA')
-        xlabel(h.axesNL,'log_1_0 n')
-        ylabel(h.axesNL,'log_1_0 F(n)')
+        set(h.axesNL,'xlim',xlim,'ylim',ylim,'FontSize',7)
+        title(h.axesNL,'DFA','FontSize',10)
+        xlabel(h.axesNL,'log_1_0 n','FontSize',8)
+        ylabel(h.axesNL,'log_1_0 F(n)','FontSize',8)
 
         %set event to copy fig on dblclick
         set(h.axesNL,'ButtonDownFcn',@copyAxes);
@@ -2901,11 +2911,11 @@ function HRVAS
         
         % temp: only plot from 0-0.6 Hz
         freqLim=1.1*opt.HF(end);
-%         fi=(f<=freqLim);
-%         f=f(fi);
-%         psd=psd(fi,:);
-%         globalPsd=globalPsd(fi);
-%         
+        fi=(f<=freqLim);
+        f=f(fi);
+        psd=psd(fi,:);
+        globalPsd=globalPsd(fi);
+        
         %Type of plot (spectrogram, global PSD, etc.)
         pt=get(h.listTFPlot,'string');
         pt=pt{get(h.listTFPlot,'value')};
@@ -2963,6 +2973,11 @@ function HRVAS
                 ylabel(h.axesTF,'LF/HF (ratio)');
                 set(h.axesTF,'ButtonDownFcn',@copyAxes);
         end
+        
+        %set axes font sizes. This is a temp fix.
+        set(h.axesTF,'fontsize',7);
+        a = get(h.axesTF,'XTickLabel');
+        set(h.axesTF,'XTickLabel',a,'fontsize',7)
         
         showStatus('');
     end
