@@ -4,6 +4,11 @@ HRVAS is a complete and self-contained heart rate variability analysis software 
 
 HRVAS was orignally hosted at Sourceforge.com were it has been downloaded almost 10,000 times.  [http://sourceforge.net/projects/hrvas/](http://sourceforge.net/projects/hrvas/)
 
+### Citations
+
+Ramshur, J. (2010). **Design, Evaluation, and Application of Heart Rate Variability Analysis Software (HRVAS)**. Masters Thesis. University of Memphis, Memphis, TN.
+
+
 ![](https://raw.githubusercontent.com/wiki/jramshur/HRVAS/images/TF-Waterfall.png)
 
 ## Wiki
@@ -35,7 +40,6 @@ HRVAS was orignally hosted at Sourceforge.com were it has been downloaded almost
 [nl]: https://github.com/jramshur/HRVAS/wiki/Nonlinear
 [tf]: https://github.com/jramshur/HRVAS/wiki/Time-Freq
 [batch]: https://github.com/jramshur/HRVAS/wiki/Batch-Processing
-
 ## Contact Info
 
 John T. Ramshur, PhD  
