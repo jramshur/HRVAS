@@ -23,7 +23,7 @@
 function HRVAS
 % HRVAS: GUI to calculate heart rate variability (HRV) measures
 %
-% Version: 1.0.3
+% Version: 1.1
 % - uitab/uitabgroup controls have been changed to accomidate
 %  Matlab 2016a
 % - added explicit font sizes for several GUI elements. The defaults apperantly
