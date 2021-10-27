@@ -7,7 +7,7 @@ HRVAS was orignally hosted at Sourceforge.com were it has been downloaded almost
 ### Citations
 
 Ramshur, J. (2010). **Design, Evaluation, and Application of Heart Rate Variability Analysis Software (HRVAS)**. Masters Thesis. University of Memphis, Memphis, TN.
-
+Nourian, a. (2021). **Design, Evaluation, and Application of Seemob Heart Rate Variability Analysis Software (sHRVAS)**.
 
 ![](https://raw.githubusercontent.com/wiki/jramshur/HRVAS/images/TF-Waterfall.png)
 
