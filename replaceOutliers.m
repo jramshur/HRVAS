@@ -60,10 +60,11 @@ function [y2,t2] = replaceOutliers(t,y,outliers, method, opt1, opt2)
                 m=floor((opt1-1)/2); %calculate half window width
             end
             
-            i=find(outliers); %index location of outliers                        
+            i=find(outliers); %index location of outliers   
+            
             i=(i(i>m+1 & i<l-m))'; %index location of outliers within range
             y(i)=nan;
-            for n=i;
+            for n=i
                 tmpy=y(n-m:n+m);
                 %replace with mean, ignore NaN values
                 y2(n)=mean(tmpy(~isnan(tmpy))); 
@@ -81,20 +82,39 @@ function [y2,t2] = replaceOutliers(t,y,outliers, method, opt1, opt2)
             end
             
             i=find(outliers); %index location of outliers
-            i=(i(i>m+1 & i<l-m))'; %index location of outliers within range
-            y(i)=nan;
-            for n=i;
-                tmpy=y(n-m:n+m);
-                %replace with median, ignore NaN values
-                y2(n)=median(tmpy(~isnan(tmpy))); 
-            end
-            
+           
+             i=(i(i>m+1 & i<l-m))'; %index location of outliers within range
+             y(i)=nan;
+             for n=i
+                 tmpy=y(n-m:n+m);
+                 %replace with median, ignore NaN values
+                 y2(n)=median(tmpy(~isnan(tmpy))); 
+             end
+             %RBJ emergency NAN replacement.
+             y2(isnan(y2))=nanmedian(y2);
             % Reference:
             % Thuraisingham, R. A. (2006). "Preprocessing RR interval time
             % series for heart rate variability analysis and estimates of
             % standard deviation of RR intervals." Comput.Methods
             % Programs Biomed.
+            
+            %% Why all that?            
+            %% I just want to replace all the outlierers with a median of
+            % the dataset.             
+         case 'medianall' %medianFilter
+            %% LIKE THIS BY RBJ ?
+            y2=y; %preallowcate newIBI series with old values
+            t2=t;
+            i=find(outliers); %index location of outliers
+            y2(i)=nan;
+            y2(isnan(y2))=nanmedian(y2);
+            t2=t2-min(t2);
+    
+
         otherwise % do nothing
+            %RBJ NAN replacement.
+            lrm=nanmean(y);
+            y2(isnan(y))=lrm;
             y2=y;
             t2=t;            
     end

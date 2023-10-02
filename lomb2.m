@@ -42,10 +42,10 @@ if nargin < 2
 end
 
 % check inputs
-if length(t) ~= length(y); 
+if length(t) ~= length(y) 
  error('t and y not same length');
  exit; 
-end;
+end
 
 % subtract mean, compute variance, initialize Pn
 z = y - mean(y);
@@ -71,4 +71,5 @@ if flagNorm %normalize by variance
     Pn=Pn./(2*var);
 else % return denormalized spectrum (see T. Thong)
     Pn=Pn./length(y);
+csvwrite('lomb.csv',Pn);
 end
