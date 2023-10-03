@@ -94,10 +94,16 @@ function output = freqDomainHRV(ibi,VLF,LF,HF,AR_order,window, ...
     
     %Welch FFT
     if flagWelch
+        %RBJ 13th March 2018
+        wintemp=window;
+        if length(t)<window
+            window=length(t);
+        end
         [output.welch.psd,output.welch.f] = ...
             calcWelch(t,y,window,noverlap,nfft,fs);
         output.welch.hrv = ...
             calcAreas(output.welch.f,output.welch.psd,VLF,LF,HF);
+        window=wintemp;
     else
         output.welch=emptyData(nfft,maxF);
     end
@@ -142,12 +148,25 @@ function [PSD,F]=calcWelch(t,y,window,noverlap,nfft,fs)
     
     %Prepare y
     t2 = t(1):1/fs:t(length(t));%time values for interp.
+    %% RBJ 20180320
+    if t(1)==t(2)
+        y=y(2:end);
+        t=t(2:end);
+    end
     y=interp1(t,y,t2','spline')'; %cubic spline interpolation
     y=y-mean(y); %remove mean
     
     %Calculate Welch PSD using hamming windowing    
-    [PSD,F] = pwelch(y,window,noverlap,(nfft*2)-1,fs,'onesided'); 
-    
+    % RBJ additions 13th MArch 2018
+    if length(y)<window
+      window=length(y);
+      noverlap=round(window/2);
+    end
+    if noverlap>=window
+        noverlap=round(window/2);
+    end
+    [PSD,F] = pwelch(y,window,noverlap,(nfft*2)-1,fs,'onesided');
+
 end
 
 function [PSD,F]=calcAR(t,y,fs,nfft,AR_order)
@@ -158,6 +177,11 @@ function [PSD,F]=calcAR(t,y,fs,nfft,AR_order)
     
     %Prepare y    
     t2 = t(1):1/fs:t(length(t)); %time values for interp.
+     %% RBJ 20180320
+    if t(1)==t(2)
+        y=y(2:end);
+        t=t(2:end);
+    end
     y=interp1(t,y,t2,'spline')'; %cubic spline interpolation
     y=y-mean(y); %remove mean
     y = y.*hamming(length(y)); %hamming window
@@ -185,8 +209,10 @@ function [PSD,F]=calcLomb(t,y,nfft,maxF)
         
     %Calculate PSD
     deltaF=maxF/nfft;
-    F = linspace(0.0,maxF-deltaF,nfft);
-    PSD=lomb2(y,t,F,false); %calc lomb psd
+    F = linspace(0.0,maxF-deltaF,nfft); 
+%   RBJ ADDED MATLAB'S LOMB
+    PSD= plomb(y,t,F,'normalized');
+%     PSD=lomb2(y,t,F,false); %calc lomb psd
 end
 
 function output=calcAreas(F,PSD,VLF,LF,HF,flagNorm)

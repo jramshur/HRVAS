@@ -93,6 +93,7 @@ end
 function output = SDNNi(ibi,t)
 %SDNNi: SDNN index is the mean of all the standard deviations of
 %NN (normal RR) intervals for all windows of lenght t.
+
     a=0;i1=1;
     tmp=zeros(ceil(sum(ibi)/t),1);
     for i2=1:length(ibi)

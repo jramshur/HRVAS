@@ -32,7 +32,7 @@ function [dibi,nibi,trend,art]=preProcessIBI(ibi, varargin)
     %Correction/replace artifacts
     p.addParamValue('replaceMethod', 'None', ...
         @(x)any(strcmpi(x,{'none','remove','mean','spline', ...
-        'median','priors'})));
+        'median','medianAll','priors'})));
     p.addParamValue('replaceInput', 5, @(x)mod(x,1)==0);
     %Detrend IBI
     p.addParamValue('detrendMethod', 'none', ...
@@ -94,7 +94,9 @@ function [nibi,art]=correctEctopic(ibi,opt)
         case 'spline'
             [y t]=replaceOutliers(t,y,art,'cubic');
         case 'remove'
-            [y t]=replaceOutliers(t,y,art,'remove');            
+            [y t]=replaceOutliers(t,y,art,'remove');        
+        case 'medianall'
+            [y t]=replaceOutliers(t,y,art,'medianall'); 
         otherwise %none
             %do nothing
      end
@@ -172,7 +174,9 @@ function [dibi,nibi,trend]=detrendIBI(ibi,opt)
         % series is near zero and some of the artifact detection methods 
         % detect two many outlers due to a mean near zero
         % Solution: shift detrended ibi back up to it's orignal mean
-        % by adding orignal mean to detrended ibi.                        
+        % by adding orignal mean to detrended ibi.
+        %% RBJ NOTE WE ARE ABOUT TO ADD THE MEANIBI EVEN THOUGH
+        % WE MAY NOT HAVE EVEN DETRENDED.
          if opt.meanCorrection
              dibi(:,2) = dibi(:,2) + meanIbi; % see note above
          end  

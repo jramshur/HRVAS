@@ -114,6 +114,11 @@ function output = timeFreqHRV(ibi,nibi,VLF,LF,HF,AR_order,winSize, ...
     if flagWavelet
         %y=nibi(:,2);
         clear nibi; % don't need it anymore
+             %% RBJ 20180320
+    if t(1)==t(2)
+        y=y(2:end);
+        t=t(2:end);
+    end
         t2 = t(1):1/fs:t(length(t)); %time values for interp.
         y=interp1(t,y,t2,'spline')'; %cubic spline interpolation
         
@@ -144,9 +149,19 @@ function [PSD,F,T]=calcAR(t,y,fs,nfft,AR_order,winSize,overlap)
 
     winSize=winSize*fs; % (samples)
     overlap=overlap*fs; % (samples)
-    
+    %RBJ March 13th 2018
+    if winSize>length(y)
+    winSize=length(y);
+    overlap=round(winSize/2);
+    end
+         %% RBJ 20180320
+    if t(1)==t(2)
+        y=y(2:end);
+        t=t(2:end);
+    end
     %resample
     tint = t(1):1/fs:t(length(t)); %time values for interp.
+
     y=interp1(t,y,tint,'spline')'; %cubic spline interpolation            
         
     %get limits of windows    
@@ -155,6 +170,7 @@ function [PSD,F,T]=calcAR(t,y,fs,nfft,AR_order,winSize,overlap)
     else
         idx=[1 length(tint)];
     end
+    
     T=tint(idx(:,1)+round(winSize/2)); %calculate center time of window (s)
                                        %used for plotting    
     
@@ -448,6 +464,10 @@ function output=calcAreas(F,PSD,VLF,LF,HF,flagNorm)
     output.nLF=round(nLF*1000)/1000;
     output.nHF=round(nHF*1000)/1000;
     output.LFHF=round(lfhf*1000)/1000;
+    % RBJ JUN@ 2018 catch an empty array
+    if isempty(peakVLF)
+        peakVLF(1)=0;
+    end
     output.peakVLF=round(peakVLF(1)*100)/100;
     output.peakLF=round(peakLF(1)*100)/100;
     output.peakHF=round(peakHF(1)*100)/100;
@@ -514,7 +534,8 @@ function [pks locs]=zipeaks(y)
 
 %check dimentions
 if isempty(y)
-    Warning('Empty input array')
+    %RBJ JUNE 2018 warning should be lowercase
+    warning('Empty input array')
     pks=[]; locs=[];
     return
 end
@@ -522,7 +543,8 @@ end
 if cols==1 && rows>1 %all data in 1st col
     y=y';
 elseif cols==1 && rows==1 
-    Warning('Short input array')
+    %RBJ JUNE 2018 warning should be lowercase
+    warning('Short input array')
     pks=[]; locs=[];
     return    
 end         
