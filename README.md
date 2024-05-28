@@ -2,11 +2,12 @@
 
 HRVAS is a complete and self-contained heart rate variability analysis software     (HRVAS) package. HRVAS offers several preprocessing options. HRVAS offers time-domeain, freq-domain, time-frequency, and nonlinear HRV analysis. All results can be exported to an Excel file. For processing many files HRVAS offers a bach processing feature. All settings/options can be saved to a .mat file and reloaded for future HRV analysis. Upon starting HRVAS all previously used settings/options are loaded.
 
-HRVAS was orignally hosted at Sourceforge.com were it has been downloaded almost 10,000 times.  [http://sourceforge.net/projects/hrvas/](http://sourceforge.net/projects/hrvas/)
 
 ### Citations
 
-Ramshur, J. (2010). **Design, Evaluation, and Application of Heart Rate Variability Analysis Software (HRVAS)**. Masters Thesis. University of Memphis, Memphis, TN.
+Thesis document: [PDF](https://github.com/jramshur/HRVAS/blob/81135494a400ff7fb104554431109f2cb71bf324/Documents/JRamshur%20-%20Masters%20Thesis%20-%20Design%20Evaluation%20and%20Application%20of%20Heart%20Rate%20Variability%20Analysis%20Software%20(HRVAS).pdf)
+
+Citation: Ramshur, J. (2010). **Design, Evaluation, and Application of Heart Rate Variability Analysis Software (HRVAS)**. Masters Thesis. University of Memphis, Memphis, TN.
 
 
 ![](https://raw.githubusercontent.com/wiki/jramshur/HRVAS/images/TF-Waterfall.png)
