@@ -18,17 +18,27 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 function exportHRV(outFile,subjects,hrv,opt)
-%exportHRV.m - exports hrv data to a MS Excel file
+% exportHRV.m - exports HRV results to a MS Excel (.xlsx) or CSV file
 %
-%INPUTS:
-%   outFile: full path and name of output file
-%   subjects: cell array of subject names. This will be the header name for
-%       subjects
-%   hrv: array of hrv structures containing hrv data
-%   opt: not used 
+% Inputs:
+%   outFile : full path and name of output file ('.xlsx' or other -> CSV)
+%   subjects: cell array of subject filenames (used as row labels)
+%   hrv     : array of HRV structures (one per subject)
+%   opt     : unused (reserved for future options)
 %
-%   TODO: 1. Include options used in HRV analysis.
-%         2. Rework code...currently very hard to follow.
+% Notes on column building:
+%   This function inspects the fields of the HRV structure to build a
+%   flexible column layout. Column groups are built for IBI info, Time
+%   Domain, Freq Domain (Welch / AR / Lomb), Poincare, Nonlinear, and
+%   Time-Freq measures. When adding new HRV output fields, update this
+%   routine so the exported columns and headers remain consistent.
+%
+% Cross-platform note:
+%   On non-Windows platforms, `xlswrite` may have limited Excel support
+%   and the CSV fallback (`cell2csv`) is recommended for headless runs.
+%
+% TODO: 1. Include options used in HRV analysis. 2. Rework code...currently
+% very hard to follow.
 %
 
     if iscellstr(subjects)%check if subjects is a char array or string array

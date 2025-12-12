@@ -23,10 +23,33 @@
 function HRVAS
 % HRVAS: GUI to calculate heart rate variability (HRV) measures
 %
+% HRVAS - main GUI entry for the HRVAS toolbox.
+% Usage:
+%   HRVAS       % Start the GUI from MATLAB prompt
+%   main        % Alternate entry that also launches the GUI
+%
+% Expected IBI input format:
+%   IBI files are N-by-2 arrays where column 1 = time (seconds or
+%   increasing timestamps) and column 2 = IBI (seconds).
+%
+% High-level flow:
+%   loadIBI -> preProcessIBI (artifact locate/replace, detrend) ->
+%   timeDomainHRV / freqDomainHRV / timeFreqHRV / nonlinearHRV -> exportHRV
+%
+% Globals used by GUI (documented here for maintainers):
+%   HRV            - structure holding the last calculated HRV results
+%   h              - GUI handles structure
+%   flagProcessed  - true when HRV has been calculated for current file
+%   flagPreviewed  - true when IBI preview was created
+%   nIBI           - non-detrended IBI (after artifact replacement)
+%   dIBI           - detrended IBI used for spectral analyses
+%   IBI            - original loaded IBI (as read from file)
+%   trend          - estimated trend used for detrending
+%
 % Version: 1.1
-% - uitab/uitabgroup controls have been changed to accomidate
-%  Matlab 2016a
-% - added explicit font sizes for several GUI elements. The defaults apperantly
+% - uitab/uitabgroup controls have been changed to accommodate
+%   Matlab 2016a
+% - added explicit font sizes for several GUI elements. The defaults apparently
 %   that have changed during MATLAB updates. 
 %
 % Notes: 
@@ -75,7 +98,9 @@ function HRVAS
         'Position',[20 50 figW figH ],...
         'Toolbar','none','Menubar','none',...
         'CloseRequestFcn',@closeGUI);
-    %Set Icon
+    % Set Icon
+    % Note: Accessing the JavaFrame is undocumented and may be removed in
+    % future MATLAB releases; this is used only to set the figure icon.
     warning('off', ...
         'MATLAB:HandleGraphics:ObsoletedProperty:JavaFrame');
     jframe=get(h.MainFigure,'javaframe');

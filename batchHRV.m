@@ -18,12 +18,21 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 function batchHRV(opt)
-%batchHRV: function that calculates hrv on all ibi files in selected
-%           directory
+% batchHRV: perform HRV calculation on all IBI files in a selected directory
 %
-%Inputs:
+% This function supports two modes:
+%  - GUI mode: call `batchHRV(settings)` from MATLAB and interact with the
+%    dialog to choose input files, output name, and options.
+%  - Console / no-GUI mode: call without arguments (or run the script)
+%    and supply the path to a saved `settings.mat` file and input directory
+%    when prompted. The saved settings file should be produced by the GUI
+%    (`saveSettings`) or by saving a `settings` struct to a .mat file.
 %
-%Outputs:
+% The export flow is: `hrv = batchGetHRV(fpaths,opt,flagNoGui);` then
+% `saveHRV(hrv,opt,fpaths,outPath)` → `exportHRV(outPath,fpaths,hrv,opt)`.
+% `exportHRV` dynamically builds output columns from the fields of the
+% HRV structure; if new result fields are added, update `exportHRV` to
+% ensure proper column order and headers.
 %
 
 

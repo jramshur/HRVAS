@@ -1,6 +1,22 @@
 ## Description:
 
-HRVAS is a complete and self-contained heart rate variability analysis software     (HRVAS) package. HRVAS offers several preprocessing options. HRVAS offers time-domeain, freq-domain, time-frequency, and nonlinear HRV analysis. All results can be exported to an Excel file. For processing many files HRVAS offers a bach processing feature. All settings/options can be saved to a .mat file and reloaded for future HRV analysis. Upon starting HRVAS all previously used settings/options are loaded.
+HRVAS is a complete and self-contained heart rate variability analysis software (HRVAS) package. HRVAS offers several preprocessing options. HRVAS offers time-domain, freq-domain, time-frequency, and nonlinear HRV analysis. All results can be exported to an Excel file. For processing many files HRVAS offers a batch processing feature. All settings/options can be saved to a .mat file and reloaded for future HRV analysis. Upon starting HRVAS all previously used settings/options are loaded.
+
+IBI files are N×2: column 1 = time (seconds or timestamps), column 2 = IBI (seconds).
+
+Requires Signal Processing and Wavelet toolboxes for full functionality.
+
+Quick-run (MATLAB):
+
+```matlab
+% Start GUI
+main
+% or
+HRVAS
+
+% Run batch (interactive or console mode)
+batchHRV
+```
 
 
 ### Citations

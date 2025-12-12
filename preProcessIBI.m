@@ -18,6 +18,34 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 function [dibi,nibi,trend,art]=preProcessIBI(ibi, varargin)
+% preProcessIBI: detect and correct ectopic IBI, then detrend IBI series
+%
+% Usage:
+%   [dibi,nibi,trend,art] = preProcessIBI(ibi, 'Name', Value, ...)
+%
+% Supported name-value pairs (case-insensitive):
+%   'locateMethod'   - cell array of methods to locate outliers (e.g. {'percent','sd','median'})
+%   'locateInput'    - numeric vector of inputs corresponding to locate methods
+%   'replaceMethod'  - 'None'|'Remove'|'Mean'|'Median'|'Spline'|'Priors'
+%   'replaceInput'   - integer window size (points) for mean/median replacement
+%   'detrendMethod'  - 'None'|'Wavelet'|'Matlab Smooth'|'Polynomial'|'Wavelet Packet'|'Priors'
+%   'smoothMethod'   - 'moving'|'lowess'|'loess'|'sgolay'|'rlowess'|'rloess'
+%   'smoothSpan'     - span (points) or percent (when using loess/lowess)
+%   'smoothDegree'   - smoothing degree for local regression
+%   'polyOrder'      - polynomial order (integer)
+%   'waveletType'    - e.g. 'db3'
+%   'waveletLevels'  - number of decomposition levels (integer)
+%   'lambda'         - smoothness priors lambda (integer)
+%   'resampleRate'   - resampling rate in Hz for time-frequency and priors
+%   'meanCorrection' - logical, add original mean back to detrended series
+%
+% Notes:
+%   - `smoothSpan` meaning depends on `smoothMethod` (points vs percent).
+%   - `resampleRate` is expressed in Hz.
+%   - This function currently uses `inputParser` with `addParamValue` calls
+%     (legacy API). Consider updating to `addParameter` (introduced in
+%     newer MATLAB versions) if refactoring the parsing section.
+
 % preProcessIBI: detects ectopic IBI, corrects ectopic IBI, and then 
 % detrends IBI
 %
