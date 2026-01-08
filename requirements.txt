@@ -1,0 +1,7 @@
+numpy>=1.26.0
+scipy>=1.12.0
+pandas>=2.2.0
+matplotlib>=3.8.0
+seaborn>=0.13.0
+PyWavelets>=1.5.0
+spectrum>=0.8.1

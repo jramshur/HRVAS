@@ -1,0 +1,51 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "hrvas"
+version = "2.0.0"
+description = "Heart Rate Variability Analysis Software (Python Port)"
+readme = "README.md"
+authors = [
+  { name = "John T. Ramshur", email = "jramshur@gmail.com" },
+]
+license = { text = "GNU General Public License v3 (GPLv3)" }
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: GNU General Public License v3 (GPLv3)",
+    "Operating System :: OS Independent",
+    "Topic :: Scientific/Engineering :: Medical Science Apps.",
+]
+dependencies = [
+    "numpy>=1.26.0",
+    "scipy>=1.12.0",
+    "pandas>=2.2.0",
+    "matplotlib>=3.8.0",
+    "seaborn>=0.13.0",
+    "PyWavelets>=1.5.0",
+    "spectrum>=0.8.1",  # Check compatibility for 3.12, may need alternatives if unmaintained
+]
+requires-python = ">=3.12"
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0.0",
+    "black",
+    "isort",
+    "jupyter",
+    "pytest-cov"
+]
+
+[project.urls]
+"Homepage" = "https://github.com/jramshur/HRVAS"
+"Bug Tracker" = "https://github.com/jramshur/HRVAS/issues"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["hrvas*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = "test_*.py"
+addopts = "-v --cov=hrvas"

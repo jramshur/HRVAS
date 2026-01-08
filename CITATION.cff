@@ -1,0 +1,25 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite both the software and the original thesis."
+authors:
+- family-names: "Ramshur"
+  given-names: "John T."
+  email: "jramshur@gmail.com"
+title: "HRVAS 2.0: Python Heart Rate Variability Analysis Software"
+version: 2.0.0
+date-released: 2024-01-01
+url: "https://github.com/jramshur/HRVAS"
+repository-code: "https://github.com/jramshur/HRVAS"
+license: GPL-3.0
+references:
+  - type: thesis
+    authors:
+      - family-names: "Ramshur"
+        given-names: "John T."
+    title: "Design, Evaluation, and Application of Heart Rate Variability Analysis Software (HRVAS)"
+    year: 2010
+    institution:
+      name: "University of Memphis"
+    department: "Joint Program in Biomedical Engineering"
+    city: "Memphis"
+    region: "TN"
+    thesis-type: "Masters Thesis"
