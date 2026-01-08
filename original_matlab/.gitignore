@@ -1,0 +1,43 @@
+#################
+## Matlab
+#################
+
+*.m~
+*.dll
+*.mexa64
+*.mexglx
+*.mexmac
+*.mexmaci
+*.mexmaci64
+*.mexw32
+*.mexw64
+*.ps
+*.asv
+*.a
+doc/html/
+
+#############
+## Windows detritus
+#############
+
+# Windows image file caches
+Thumbs.db
+ehthumbs.db
+
+# Folder config file
+Desktop.ini
+
+# Recycle Bin used on file shares
+$RECYCLE.BIN/
+
+# Mac crap
+.DS_Store
+
+#############
+## Untracked files:
+#############
+
+*.zip
+*.csv
+HRVAS/
+Documentation/

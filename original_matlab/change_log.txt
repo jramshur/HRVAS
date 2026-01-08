@@ -1,0 +1,7 @@
+HRVAS Version/Change Log
+
+v1.0.1 - 9/12/2010
+    1. Formated code for better printing
+    2. Minor visual changes to the GUI's result tabs
+v1.0.2. - 03/04/2013
+    1. Added error handling for TINN function. 

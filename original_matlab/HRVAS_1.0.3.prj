@@ -1,0 +1,129 @@
+<deployment-project plugin="plugin.ezdeploy" plugin-version="1.0">
+  <configuration file="E:\Google Drive\GitHub\HRVAS\HRVAS_1.0.3.prj" location="E:\Google Drive\GitHub\HRVAS" name="HRVAS_1.0.3" target="target.ezdeploy.standalone" target-name="Application Compiler">
+    <param.appname>HRVAS</param.appname>
+    <param.icon />
+    <param.icons />
+    <param.version>1.1</param.version>
+    <param.authnamewatermark>John Ramshur</param.authnamewatermark>
+    <param.email>jramshur@gmail.com</param.email>
+    <param.company />
+    <param.summary />
+    <param.description />
+    <param.screenshot />
+    <param.guid />
+    <param.installpath.string>\HRVAS\</param.installpath.string>
+    <param.installpath.combo>option.installpath.programfiles</param.installpath.combo>
+    <param.logo />
+    <param.install.notes />
+    <param.target.install.notes />
+    <param.intermediate>${PROJECT_ROOT}\HRVAS_1.0.3\for_testing</param.intermediate>
+    <param.files.only>${PROJECT_ROOT}\HRVAS_1.0.3\for_redistribution_files_only</param.files.only>
+    <param.output>${PROJECT_ROOT}\HRVAS_1.0.3\for_redistribution</param.output>
+    <param.logdir>${PROJECT_ROOT}\HRVAS_1.0.3</param.logdir>
+    <param.enable.clean.build>false</param.enable.clean.build>
+    <param.user.defined.mcr.options />
+    <param.embed.ctf>true</param.embed.ctf>
+    <param.target.type>subtarget.standalone</param.target.type>
+    <param.support.packages />
+    <param.web.mcr>true</param.web.mcr>
+    <param.package.mcr>false</param.package.mcr>
+    <param.no.mcr>false</param.no.mcr>
+    <param.web.mcr.name>MyAppInstaller_web</param.web.mcr.name>
+    <param.package.mcr.name>MyAppInstaller_mcr</param.package.mcr.name>
+    <param.no.mcr.name>MyAppInstaller_app</param.no.mcr.name>
+    <param.windows.command.prompt>true</param.windows.command.prompt>
+    <param.create.log>true</param.create.log>
+    <param.log.file>hrvas_log</param.log.file>
+    <unset>
+      <param.icon />
+      <param.icons />
+      <param.company />
+      <param.summary />
+      <param.description />
+      <param.screenshot />
+      <param.guid />
+      <param.installpath.string />
+      <param.installpath.combo />
+      <param.logo />
+      <param.target.install.notes />
+      <param.intermediate />
+      <param.files.only />
+      <param.output />
+      <param.logdir />
+      <param.enable.clean.build />
+      <param.user.defined.mcr.options />
+      <param.embed.ctf />
+      <param.target.type />
+      <param.support.packages />
+      <param.web.mcr />
+      <param.package.mcr />
+      <param.no.mcr />
+      <param.web.mcr.name />
+      <param.package.mcr.name />
+      <param.no.mcr.name />
+      <param.windows.command.prompt />
+    </unset>
+    <fileset.main>
+      <file>${PROJECT_ROOT}\HRVAS.m</file>
+    </fileset.main>
+    <fileset.resources />
+    <fileset.package>
+      <file>${PROJECT_ROOT}\Documentation</file>
+      <file>${PROJECT_ROOT}\SampleData</file>
+    </fileset.package>
+    <fileset.depfun>
+      <file>${PROJECT_ROOT}\batchHRV.m</file>
+      <file>${PROJECT_ROOT}\ellipsedraw.m</file>
+      <file>${PROJECT_ROOT}\exportHRV.m</file>
+      <file>${PROJECT_ROOT}\freqDomainHRV.m</file>
+      <file>${PROJECT_ROOT}\locateOutliers.m</file>
+      <file>${PROJECT_ROOT}\lomb2.m</file>
+      <file>${PROJECT_ROOT}\nonlinearHRV.m</file>
+      <file>${PROJECT_ROOT}\poincareHRV.m</file>
+      <file>${PROJECT_ROOT}\preProcessIBI.m</file>
+      <file>${PROJECT_ROOT}\replaceOutliers.m</file>
+      <file>${PROJECT_ROOT}\slidingWindow.m</file>
+      <file>${PROJECT_ROOT}\timeDomainHRV.m</file>
+      <file>${PROJECT_ROOT}\timeFreqHRV.m</file>
+      <file>${PROJECT_ROOT}\wavelet.m</file>
+    </fileset.depfun>
+    <build-deliverables>
+      <file location="${PROJECT_ROOT}\HRVAS_1.0.3\for_testing" name="readme.txt" optional="true">E:\Google Drive\GitHub\HRVAS\HRVAS_1.0.3\for_testing\readme.txt</file>
+      <file location="${PROJECT_ROOT}\HRVAS_1.0.3\for_testing" name="splash.png" optional="false">E:\Google Drive\GitHub\HRVAS\HRVAS_1.0.3\for_testing\splash.png</file>
+      <file location="${PROJECT_ROOT}\HRVAS_1.0.3\for_testing" name="HRVAS.exe" optional="false">E:\Google Drive\GitHub\HRVAS\HRVAS_1.0.3\for_testing\HRVAS.exe</file>
+    </build-deliverables>
+    <workflow />
+    <matlab>
+      <root>C:\Program Files\MATLAB\R2016a</root>
+      <toolboxes>
+        <toolbox name="matlabcoder" />
+        <toolbox name="embeddedcoder" />
+      </toolboxes>
+      <toolbox>
+        <matlabcoder>
+          <enabled>true</enabled>
+        </matlabcoder>
+      </toolbox>
+      <toolbox>
+        <embeddedcoder>
+          <enabled>true</enabled>
+        </embeddedcoder>
+      </toolbox>
+    </matlab>
+    <platform>
+      <unix>false</unix>
+      <mac>false</mac>
+      <windows>true</windows>
+      <win2k>false</win2k>
+      <winxp>false</winxp>
+      <vista>false</vista>
+      <linux>false</linux>
+      <solaris>false</solaris>
+      <osver>6.2</osver>
+      <os32>false</os32>
+      <os64>true</os64>
+      <arch>win64</arch>
+      <matlab>true</matlab>
+    </platform>
+  </configuration>
+</deployment-project>
