@@ -30,7 +30,7 @@ def load_ibi(file_path: Union[str, Path], header_row: Optional[int] = 0) -> pd.D
         
         # Normalize columns
         # Case 1: Standard 'Time', 'IBI' headers exist
-        clean_cols = [c.lower() for c in df.columns]
+        clean_cols = [str(c).lower() for c in df.columns]
         if 'time' in clean_cols and 'ibi' in clean_cols:
             # Rename for consistency
             rename_map = {old: new for old, new in zip(df.columns, clean_cols)}

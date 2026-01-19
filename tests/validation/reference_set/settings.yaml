@@ -1,13 +1,57 @@
-time_domain: {pnn_threshold_ms: 10.0}
-frequency_domain:
-  interpolation_rate: 10.0
-  window_size_s: 256.0
-  overlap: 0.5
-  vlf_band: [0.0, 0.16]
-  lf_band: [0.16, 0.6]
-  hf_band: [0.6, 3.0]
-_future:
-  preprocessing: {detrend_method: Smothness Priors, smoothness_priors_lambda: 155.0,
-    wavelet_type: db, wavelet_levels: 6}
-  artifacts: {detection_percent: 1, detection_sd: 1, replacement_method: Remove}
-  nonlinear: {ar_order: 16, embedding_dimension_m: 2, r_threshold: 0.15}
+# HRVAS Settings (Reference Set)
+# Structure matches original MATLAB GUI
+
+ibi_preprocessing:
+  artifact_detection:
+    percent: {enabled: true, threshold: 20}
+    std_dev: {enabled: true, threshold: 4}
+    median: {enabled: false, threshold: 4}
+  
+  artifact_replace:
+    # Options: None, Mean, Median, Spline, Remove
+    method: Remove
+    mean_val: 9
+    median_val: 30
+
+  detrending:
+    method: Smothness Priors
+    # Wavelet options (if method == Wavelet)
+    wavelet_type: db
+    wavelet_param: 12  # 'n' in GUI
+    wavelet_levels: 6
+    # Smoothness Priors options (if method == Smoothness Priors)
+    smoothness_priors_lambda: 155.0
+
+time_domain:
+  pnnx_ms: 10.0
+  sdnni_min: 0.5
+
+freq_domain:
+  frequency_bands:
+    vlf_hz: [0.0, 0.16]
+    lf_hz: [0.16, 0.6]
+    hf_hz: [0.6, 3.0]
+  
+  ibi_interpolation:
+    rate_hz: 10.0
+  
+  points_in_psd: 512
+  
+  welch_options:
+    window_width_pts: 256
+    window_overlap_pts: 128
+    
+  ar_options:
+    burg_model_order: 16
+
+nonlinear:
+  sampen:
+    r: 0.15
+    m: 2
+  dfa:
+    n_min_max: [4, 64]
+    break_point: 10
+
+time_freq:
+  window_s: 30
+  overlap_s: 15
