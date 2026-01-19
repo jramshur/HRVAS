@@ -1,0 +1,13 @@
+time_domain: {pnn_threshold_ms: 10.0}
+frequency_domain:
+  interpolation_rate: 10.0
+  window_size_s: 256.0
+  overlap: 0.5
+  vlf_band: [0.0, 0.16]
+  lf_band: [0.16, 0.6]
+  hf_band: [0.6, 3.0]
+_future:
+  preprocessing: {detrend_method: Smothness Priors, smoothness_priors_lambda: 155.0,
+    wavelet_type: db, wavelet_levels: 6}
+  artifacts: {detection_percent: 1, detection_sd: 1, replacement_method: Remove}
+  nonlinear: {ar_order: 16, embedding_dimension_m: 2, r_threshold: 0.15}

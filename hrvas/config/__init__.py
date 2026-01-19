@@ -31,8 +31,32 @@ class FrequencyDomainConfig:
     lf_band: tuple = (0.04, 0.15)
     hf_band: tuple = (0.15, 0.40)
 
+
 @dataclass
 class HRVASConfig:
     time_domain: TimeDomainConfig = field(default_factory=TimeDomainConfig)
     geometric: GeometricConfig = field(default_factory=GeometricConfig)
     frequency_domain: FrequencyDomainConfig = field(default_factory=FrequencyDomainConfig)
+
+    @classmethod
+    def from_yaml(cls, path: str) -> "HRVASConfig":
+        """Load configuration from a YAML file."""
+        import yaml
+        with open(path, 'r') as f:
+            data = yaml.safe_load(f)
+        
+        # Helper to recursively load dicts into dataclasses
+        td_data = data.get("time_domain", {})
+        time_domain = TimeDomainConfig(**td_data)
+
+        geo_data = data.get("geometric", {})
+        geometric = GeometricConfig(**geo_data)
+
+        fd_data = data.get("frequency_domain", {})
+        frequency_domain = FrequencyDomainConfig(**fd_data)
+
+        return cls(
+            time_domain=time_domain,
+            geometric=geometric,
+            frequency_domain=frequency_domain
+        )
