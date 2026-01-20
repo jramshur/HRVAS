@@ -15,7 +15,8 @@ def detrend_ibi(
     lambda_param: float = 500.0,
     poly_order: int = 2,
     wavelet: str = 'db4',
-    wavelet_level: int = 6
+    wavelet_level: int = 6,
+    sampling_rate: float = 4.0
 ) -> Tuple[NDArray[np.float64], NDArray[np.float64]]:
     """
     Main entry point for detrending.
@@ -32,7 +33,7 @@ def detrend_ibi(
         return polynomial_detrend(time, ibi, poly_order=poly_order)
         
     elif method == DetrendMethod.SMOOTHNESS_PRIORS:
-        return smoothness_priors_detrend(time, ibi, lambda_param=lambda_param)
+        return smoothness_priors_detrend(time, ibi, lambda_param=lambda_param, sampling_rate=sampling_rate)
         
     elif method == DetrendMethod.WAVELET:
         return wavelet_detrend(time, ibi, wavelet=wavelet, level=wavelet_level)

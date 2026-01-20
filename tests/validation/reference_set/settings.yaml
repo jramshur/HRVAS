@@ -4,7 +4,7 @@
 ibi_preprocessing:
   artifact_detection:
     percent: {enabled: true, threshold: 20}
-    std_dev: {enabled: true, threshold: 4}
+    std_dev: {enabled: true, threshold: 3}
     median: {enabled: false, threshold: 4}
   
   artifact_replace:
@@ -14,7 +14,7 @@ ibi_preprocessing:
     median_val: 30
 
   detrending:
-    method: Smothness Priors
+    method: Smoothness Priors
     # Wavelet options (if method == Wavelet)
     wavelet_type: db
     wavelet_param: 12  # 'n' in GUI
