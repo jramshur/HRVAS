@@ -10,11 +10,15 @@ from numpy.typing import NDArray
 class GeometricResults:
     triangular_index: float
     tinn: Optional[float]
+    # Histogram Data for plotting
+    ibi_histogram_counts: Optional[NDArray[np.float64]] = None
+    ibi_histogram_bins: Optional[NDArray[np.float64]] = None
 
 
 def calculate_geometric_metrics(
     ibi: NDArray[np.float64],
-    bin_width_ms: float = 7.8125 # 1/128 seconds as per MATLAB/Standards
+    bin_width_ms: float = 7.8125, # 1/128 seconds as per MATLAB/Standards
+    n_bins: Optional[int] = None
 ) -> GeometricResults:
     """
     Calculate Geometric HRV measures: HRV Triangular Index and TINN.
@@ -22,9 +26,10 @@ def calculate_geometric_metrics(
     Args:
         ibi: Array of Inter-Beat Intervals in seconds.
         bin_width_ms: Width of histogram bins in milliseconds (default 1/128 s = 7.8125ms).
+        n_bins: Optional override to use a fixed number of bins instead of bin_width_ms.
         
     Returns:
-        GeometricResults object containing triangular_index and tinn (in ms).
+        GeometricResults object containing triangular_index, tinn (in ms), and histogram data.
     """
     nni_ms = ibi * 1000.0
     
@@ -33,17 +38,32 @@ def calculate_geometric_metrics(
     t_max = np.max(nni_ms)
     
     # Create bins
-    # MATLAB: nBins=round(dt/binWidth)
-    # We use explicit bin edges for histogram
-    bins = np.arange(t_min, t_max + bin_width_ms, bin_width_ms)
-    
-    counts, edges = np.histogram(nni_ms, bins=bins)
+    if n_bins is not None:
+        # Fixed bin count mode (MATLAB Legacy behavior often forces 32 bins)
+        # numpy.histogram with integer bins does equal-width bins automatically
+        counts, edges = np.histogram(nni_ms, bins=n_bins)
+    else:
+        # Fixed bin width mode
+        # MATLAB: nBins=round(dt/binWidth)
+        # We use explicit bin edges for histogram
+        if t_min == t_max:
+            # Single value case, create a bin centered/surrounding it
+            bins = np.array([t_min - bin_width_ms/2, t_min + bin_width_ms/2])
+        else:
+            bins = np.arange(t_min, t_max + bin_width_ms, bin_width_ms)
+        
+        counts, edges = np.histogram(nni_ms, bins=bins)
     
     # 1. HRV Triangular Index
     # Total number of NN intervals / Number of NN intervals in the modal bin (max density)
     max_density = np.max(counts)
     if max_density == 0:
-        return GeometricResults(triangular_index=0.0, tinn=0.0)
+        return GeometricResults(
+            triangular_index=0.0, 
+            tinn=0.0,
+            ibi_histogram_counts=counts,
+            ibi_histogram_bins=edges
+        )
         
     triangular_index = len(nni_ms) / max_density
     
@@ -62,7 +82,12 @@ def calculate_geometric_metrics(
     # If peak is at boundaries, cannot compute TINN effectively (MATLAB returns NaN)
     n_bins = len(counts)
     if peak_idx == 0 or peak_idx == n_bins - 1:
-        return GeometricResults(triangular_index=triangular_index, tinn=np.nan)
+        return GeometricResults(
+            triangular_index=triangular_index, 
+            tinn=np.nan,
+            ibi_histogram_counts=counts,
+            ibi_histogram_bins=edges
+        )
         
     # MATLAB Optimization Loop
     # Finds M (start) and N (end) of triangle base that minimizes squared error
@@ -115,6 +140,7 @@ def calculate_geometric_metrics(
             
             # Right ramp: Y to 0
             # MATLAB: q(peaki:n)=linspace(Y, 0, n-peaki+1)
+            # Python: peak_idx to n
             len_right = n - peak_idx + 1
             q[peak_idx : n + 1] = np.linspace(Y, 0, len_right)
             
@@ -122,9 +148,6 @@ def calculate_geometric_metrics(
             # MATLAB: trapz((D-q).^2)
             # Simple sum of squares is often sufficient for discrete, otherwise trapz using step size 1 (bins)
             error = np.sum((D - q)**2)
-            
-            # If standardizing on trapz:
-            # error = np.trapz((D - q)**2)
             
             if error < min_error:
                 min_error = error
@@ -135,4 +158,9 @@ def calculate_geometric_metrics(
     # TINN = Base width in ms = x[n] - x[m]
     tinn_ms = x_centers[best_n] - x_centers[best_m]
     
-    return GeometricResults(triangular_index=triangular_index, tinn=tinn_ms)
+    return GeometricResults(
+        triangular_index=triangular_index, 
+        tinn=tinn_ms,
+        ibi_histogram_counts=counts,
+        ibi_histogram_bins=edges
+    )

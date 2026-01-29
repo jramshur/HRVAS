@@ -11,23 +11,26 @@ AI Agents should check this file to understand "what is next" when starting a ne
 - [/] Porting Time Domain Analysis
     - [x] Basic statistical metrics (SDNN, RMSSD)
     - [x] Geometric methods (Triangular Index) base implementation
-    - [ ] Validation against MATLAB results
-- [ ] Porting Frequency Domain Analysis
-- [ ] Porting Preprocessing (Detrending, Filtering)
+- [x] Porting Preprocessing (Artifact Detection, Detrending)
 
 ## Backlog (Future Phases)
 
-### Phase 2: Advanced Analysis
+### Phase 2: Validation & Benchmarking
+- [ ] Validation against known reference results
+- [ ] Comprehensive Test Suite coverage
+
+### Phase 3: Advanced Analysis
+- [ ] Porting Frequency Domain Analysis
 - [ ] Nonlinear Analysis (Poincare, DFA, Sample Entropy)
 - [ ] Time-Frequency Analysis
 - [ ] Batch Processing capabilities
 
-### Phase 3: Documentation & Release
+### Phase 4: Documentation & Release
 - [ ] Comprehensive API Documentation
 - [ ] Usage Examples / Jupyter Notebooks
 - [ ] PyPI Release preparation
 
-### Phase 4: Application Layer
+### Phase 5: Application Layer
 - [ ] REST API or CLI interface
 - [ ] Web/Desktop GUI (Long term)
 

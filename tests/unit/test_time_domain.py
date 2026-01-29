@@ -1,6 +1,6 @@
 import numpy as np
 import pytest
-from hrvas.analysis.time_domain.statistical import (
+from hrvas.analysis.time_domain import (
     calculate_standard_metrics,
     calculate_sdann,
     calculate_sdnni,

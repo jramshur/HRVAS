@@ -26,7 +26,7 @@ dependencies = [
     "PyWavelets>=1.5.0",
     "spectrum>=0.8.1",  # Check compatibility for 3.12, may need alternatives if unmaintained
 ]
-requires-python = ">=3.12"
+requires-python = ">=3.11"
 
 [project.optional-dependencies]
 dev = [
